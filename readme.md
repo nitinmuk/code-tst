@@ -19,18 +19,18 @@
         - `src/02_get-first-non-repeating-char.js`
         - `src/03_pagination.js`
         - `src/04_remote-data.js`
-    - The test files can be found alongside the solution file with `.spec.js` extension.
+    - The unit test files can be found alongside the solution file with `.spec.js` extension.
+    - The unit tests are not exhaustive or necessarily correct
     - We recommend you use `https://yarnpkg.com/package/got` to make API calls for `src/04_remote-data.js`. You may install any other package if you wish.
-    - EXTRA POINTS:
-        - Add extra tests to make the code coverage higher
 
 ## End Goal
 
-Make all failing tests pass!!
+- Make all failing tests pass.
+- Improve the unit tests.
 
 ## How to submit your solutions ?
 
-- Push your solutions to your personal gihub account
+- Push your solutions to your personal gihub account or email us a zip file.
 - Email us when you are done!
 
 # BEST OF LUCK !!
