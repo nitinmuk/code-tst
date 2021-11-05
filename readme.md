@@ -21,6 +21,7 @@
         - `src/04_remote-data.js`
     - The unit test files can be found alongside the solution file with `.spec.js` extension.
     - The unit tests are not exhaustive or necessarily correct
+    - Try to write production grade code. Consider error handling, edge cases, performance etc.
     - We recommend you use `https://yarnpkg.com/package/got` to make API calls for `src/04_remote-data.js`. You may install any other package if you wish.
 
 ## End Goal
