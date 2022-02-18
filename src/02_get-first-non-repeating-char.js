@@ -5,7 +5,15 @@
  * @param {String} str
  */
 function solution (str) {
-
+    if(str) {
+        for(let i = 0; i<str.length; i++) {
+            const currentChar = str.charAt(i);
+            if(str.indexOf(currentChar) === str.lastIndexOf(currentChar)) {
+                return currentChar;
+            }
+        }
+    }
+  
 }
 
 module.exports = solution
