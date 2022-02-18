@@ -5,6 +5,14 @@
  * @param {Array<string>} pageData
  */
 function solution (pageNumber, itemsPerPage, pageData) {
+  if(typeof pageNumber === 'number' && 
+     typeof itemsPerPage === 'number' && Array.isArray(pageData)); 
+  {
+  const startIndex = pageNumber > 0 ? (pageNumber - 1) * itemsPerPage : 0;
+  const maxPossibleEndIndex = startIndex + itemsPerPage - 1;
+  const requestedPage = pageData.filter((value, index) => index >= startIndex && index <= maxPossibleEndIndex);
+  return requestedPage.length ? requestedPage : null;
+  }
 
 }
 
