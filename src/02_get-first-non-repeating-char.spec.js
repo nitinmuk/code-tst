@@ -1,12 +1,12 @@
-const solution = require('./02_get-first-non-repeating-char')
-const { InvalidFunctionParamError } = require('./error')
+const solution = require('./02_get-first-non-repeating-char');
+const { InvalidFunctionParamError } = require('./error');
 
 test('Test 1 - "this is the string"', () => {
-  expect(solution('this is the string')).toBe('e')
+  expect(solution('this is the string')).toBe('e');
 })
 
 test('Test 2 - "persuit is a good place to work"', () => {
-  expect(solution('persuit is a good place to work')).toBe('u')
+  expect(solution('persuit is a good place to work')).toBe('u');
 })
 
 test('Test 3 - should throw InvalidFunctionParamError when function param is not string', () => {
@@ -27,8 +27,8 @@ test('Test 3 - should throw InvalidFunctionParamError when function param is not
     })
 });
 
-test('Test 4 - empty string should return undefined', () => {
-  expect(solution('')).toBeUndefined();
+test('Test 4 - empty string should return null', () => {
+  expect(solution('')).toBe(null);
 });
 
 test('Test 5 - "a" should return a', () => {
@@ -37,4 +37,8 @@ test('Test 5 - "a" should return a', () => {
 
 test('Test 6 - "a:ab" should return :', () => {
   expect(solution('a:ab')).toBe(':');
+});
+
+test('Test 7 - "amam" should return null', () => {
+  expect(solution('amam')).toBe(null);
 });

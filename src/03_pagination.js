@@ -1,17 +1,26 @@
-const { InvalidPageNumberError, InvalidFunctionParamError, InvalidItemsPerPageError } = require("./error");
+const { InvalidFunctionParamError } = require('./error');
+const createLogger = require('./logger');
+
+const logger = createLogger('pagination');
 
 const validatePaginationRequest = (pageNumber, itemsPerPage, pageData) => {
-  let msg;
+  let messages = [];
+  let objectToLog = {};
   if(typeof pageNumber !== 'number') {
-    msg = `pageNumber: ${pageNumber} is not a number`;
+    messages.push('pageNumber is not a number.');
+    objectToLog = {...objectToLog, pageNumber};
   }
   if(typeof itemsPerPage !== 'number') {
-    msg = `itemsPerPage: ${itemsPerPage} is not a number`;
+    messages.push('itemsPerPage is not a number.');
+    objectToLog = {...objectToLog, itemsPerPage};
   }
   if(!Array.isArray(pageData)) {
-    msg = `pageData: ${pageData} is not an array`;
+    messages.push('pageData is not an array.');
+    objectToLog = {...objectToLog, pageData};
   }
-  if(msg) {
+  if(messages.length) {
+    const msg = messages.reduce((previousMessage, currentMessage) => `${previousMessage}${currentMessage}`,'');
+    logger.warn(objectToLog, msg);
     throw new InvalidFunctionParamError(msg);
   }
   return;
@@ -58,6 +67,6 @@ const data = [
   'x',
   'y',
   'z'
-]
+];
 
-module.exports = { solution, data }
+module.exports = { solution, data };

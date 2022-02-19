@@ -1,4 +1,7 @@
-const { InvalidFunctionParamError } = require("./error");
+const { InvalidFunctionParamError } = require('./error');
+const createLogger = require('./logger');
+
+const logger = createLogger('get-first-non-repeating-chars');
 
 /**
  *  This function takes a finite string and returns
@@ -8,7 +11,9 @@ const { InvalidFunctionParamError } = require("./error");
  */
 function solution (str) {
     if(typeof str !== 'string') {
-        throw new InvalidFunctionParamError(`str: ${str} is not a string`);
+        const msg = 'str is not a string.';
+        logger.warn({ str }, msg);
+        throw new InvalidFunctionParamError(msg);
     }
     for(let i = 0; i<str.length; i++) {
         const currentChar = str.charAt(i);
@@ -16,6 +21,7 @@ function solution (str) {
             return currentChar;
         }
     }
+    return null;
   
 }
 
