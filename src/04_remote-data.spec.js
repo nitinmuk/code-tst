@@ -10,7 +10,7 @@ const users = [{ id: 1, username: 'Tom'}, { id: 2, username: 'Jerry'}, { id: 3, 
 const todos = [{ id: 2, userId: 1, completed: true }, { id: 4, userId: 1, completed: true }, { id: 6, userId: 3, completed: true }];
 const error = { error: 'fake error'};
 
-test('Test 1 - must return completed count and username for all users', async () => {
+test('Test 1 - must return count of completed todos and username for all users', async () => {
   // Arrange
   got.mockImplementationOnce(() => { return {
     json: () => Promise.resolve(todos),

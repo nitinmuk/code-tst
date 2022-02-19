@@ -19,13 +19,14 @@ async function solution () {
     const usersPromise = got(usersURL).json();
     try {
     const [todos, users] = await Promise.all([todosPromise, usersPromise]);
+    //@TODO validate response data schema for users and todos is as expected, otherwise throw error
     return users.map(user => {
         const completed = todos.filter(todo => todo.userId === user.id && todo.completed).length;
         const { username } = user;
         return { username, completed };
     });
    } catch(error) {
-       const msg = 'Unexpected error while fetching todos & users';
+       const msg = 'Unexpected error while fetching todos & users.';
        logger.error(error, msg);
        throw new UserTodoFetchError(msg);
    }
