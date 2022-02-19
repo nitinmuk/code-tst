@@ -1,4 +1,5 @@
 const { solution, data } = require('./03_pagination')
+const { InvalidItemsPerPageError, InvalidFunctionParamError } = require('./error')
 
 test('Test 1 - page 1, 5 items per page', () => {
   // Arrange
@@ -75,3 +76,79 @@ test('Test 8 - page -1, 5 items per page', () => {
   // Assert
   expect(actual).toEqual(expected)
 })
+
+test('Test 9 - page 1, 0 items per page', () => {
+  // Arrange
+  const expected = null;
+  // Act
+  const actual = solution(1, 0, data);
+  // Assert
+  expect(actual).toEqual(expected);
+
+});
+
+test('Test 10 - page 2, -1 items per page', () => {
+  // Arrange
+  const expected = null;
+  // Act
+  const actual = solution(2, -1, data);
+  // Assert
+  expect(actual).toEqual(expected);
+
+});
+
+const commonInvalidValues = [null, undefined, '1', {}, ''];
+
+test('Test 11 - throws InvalidFunctionParamError when itemsPerPage is invalid type', () => {
+  // Arrange
+  const expected = InvalidFunctionParamError;
+  // Act
+  let actual;
+  const invalidItemsPerPage = [...commonInvalidValues, []];
+    invalidItemsPerPage.forEach(invalidItemPerPage => {
+      try {
+        solution(1, invalidItemPerPage, data);
+      } catch(error) {
+        actual = error;
+      }
+      // Assert
+      expect(actual).toBeInstanceOf(expected);
+      actual = undefined;
+    })
+});
+
+test('Test 12 - throws InvalidFunctionParamError when pageNumber is invalid type', () => {
+  // Arrange
+  const expected = InvalidFunctionParamError;
+  const invalidPageNumbers = [...commonInvalidValues, []];
+  // Act
+  let actual;
+  invalidPageNumbers.forEach(invalidPageNumber => {
+      try {
+        solution(invalidPageNumber, 1, data);
+      } catch(error) {
+        actual = error;
+      }
+      // Assert
+      expect(actual).toBeInstanceOf(expected);
+      actual = undefined;
+    })
+});
+
+test('Test 13 - throws InvalidFunctionParamError when data is invalid type', () => {
+  // Arrange
+  const expected = InvalidFunctionParamError;
+  // Act
+  let actual;
+  const invalidDataValues = [...commonInvalidValues, 1];
+  invalidDataValues.forEach(invalidDataValue => {
+      try {
+        solution(1, 1, invalidDataValue);
+      } catch(error) {
+        actual = error;
+      }
+      // Assert
+      expect(actual).toBeInstanceOf(expected);
+      actual = undefined;
+    })
+});

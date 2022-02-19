@@ -1,4 +1,5 @@
 const solution = require('./01_convert-object-to-array')
+const { InvalidFunctionParamError } = require('./error')
 
 const generateData = () => {
   const expected = []
@@ -35,3 +36,34 @@ test('should convert a dynamically created object to array', () => {
   // Assert
   expect(actual).toEqual(expected)
 })
+
+test('should convert an empty object into an empty array', () => {
+  // Arrange
+  const input = {};
+  const expected = [];
+
+  // Act
+  const actual = solution(input);
+
+  // Assert
+  expect(actual).toEqual(expected);
+});
+
+test('should throw InvalidFunctionParamError when function param is invalid type', () => {
+  // Arrange
+  const invalidParamValues = ['', 1, [], '!@34ed'];
+  const expected = InvalidFunctionParamError;
+  // Act
+  let actual;
+  invalidParamValues.forEach(invalidParamValue => {
+      try {
+        solution(invalidParamValue);
+      } catch(error) {
+        actual = error;
+      }
+      // Assert
+      expect(actual).toBeInstanceOf(expected);
+      actual = undefined;
+    })
+});
+

@@ -1,3 +1,22 @@
+const { InvalidPageNumberError, InvalidFunctionParamError, InvalidItemsPerPageError } = require("./error");
+
+const validatePaginationRequest = (pageNumber, itemsPerPage, pageData) => {
+  let msg;
+  if(typeof pageNumber !== 'number') {
+    msg = `pageNumber: ${pageNumber} is not a number`;
+  }
+  if(typeof itemsPerPage !== 'number') {
+    msg = `itemsPerPage: ${itemsPerPage} is not a number`;
+  }
+  if(!Array.isArray(pageData)) {
+    msg = `pageData: ${pageData} is not an array`;
+  }
+  if(msg) {
+    throw new InvalidFunctionParamError(msg);
+  }
+  return;
+}
+
 /**
  *  Returns an array based on the pageNumber and itemsPerPage from pageData
  * @param {number} pageNumber
@@ -5,15 +24,11 @@
  * @param {Array<string>} pageData
  */
 function solution (pageNumber, itemsPerPage, pageData) {
-  if(typeof pageNumber === 'number' && 
-     typeof itemsPerPage === 'number' && Array.isArray(pageData)); 
-  {
+  validatePaginationRequest(pageNumber, itemsPerPage, pageData);
   const startIndex = pageNumber > 0 ? (pageNumber - 1) * itemsPerPage : 0;
-  const maxPossibleEndIndex = startIndex + itemsPerPage - 1;
+  const maxPossibleEndIndex = itemsPerPage > 0 ? startIndex + itemsPerPage - 1 : -1;
   const requestedPage = pageData.filter((value, index) => index >= startIndex && index <= maxPossibleEndIndex);
   return requestedPage.length ? requestedPage : null;
-  }
-
 }
 
 const data = [
